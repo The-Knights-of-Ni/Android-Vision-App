@@ -23,7 +23,7 @@ import java.util.ArrayList;
  */
 
 public class MainActivity extends Activity implements CvCameraViewListener2 {
-    static final String TAG = "OpenCV Test";
+    private static final String TAG = "OpenCV Test";
 
     private CameraBridgeViewBase openCvCameraView;
 
@@ -112,6 +112,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
         Core.flip(rgb, rgb, 1);
         if(frameRequested){
             frameRequested = false;
+            VisionHelper.detectBeacon(rgb);
             Log.d(TAG, "Returned processed frame: " + (System.currentTimeMillis() - lastFrameRequestedTime));
         }
         return rgb;
