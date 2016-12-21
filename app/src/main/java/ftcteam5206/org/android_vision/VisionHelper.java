@@ -14,6 +14,8 @@ import java.util.List;
 
 /**
  * Created by tarunsingh on 12/19/16.
+ *
+ * Just copied over Parker's code, need to test it
  */
 
 public class VisionHelper {
@@ -34,7 +36,8 @@ public class VisionHelper {
     private final static int saturation = 0;
     private final static int value = 100;
 
-    public static void detectBeacon(Mat src) {
+    /** Returns true if red is right */
+    public static boolean detectBeacon(Mat src) {
         HSV = new Mat();
         red = new Mat();
         blue = new Mat();
@@ -96,14 +99,15 @@ public class VisionHelper {
             blueCenter = blueMoments.m10/blueMoments.m00;
         }
 
+        /*
         //draw the contours on the image
         Imgproc.drawContours(src,redContourList,redSelector,new Scalar(255,0,0),-1);
         Imgproc.drawContours(src,blueContourList,blueSelector,new Scalar(0,0,255),-1);
+        */
 
         Log.d(TAG, "Red: " + redCenter + ", Blue: " + blueCenter);
         if(redCenter < blueCenter)
-            Log.d(TAG, "Red is Left, Blue is Right");
-        else
-            Log.d(TAG, "Blue is Left, Red is Right");
+            return false;
+        return true;
     }
 }
